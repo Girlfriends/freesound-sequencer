@@ -26,7 +26,9 @@
     "lint-fix": "eslint src -c ./.eslintrc.json --fix",
     "test": "npm run lint"
   },
-  "dependencies": {},
+  "dependencies": {
+    "react": "^15.5.4"
+  },
   "devDependencies": {
     "autoprefixer": "^6.5.1",
     "babel-core": "^6.9.1",
