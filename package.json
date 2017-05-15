@@ -27,6 +27,7 @@
     "test": "npm run lint"
   },
   "dependencies": {
+    "config": "^1.26.1",
     "react": "^15.5.4"
   },
   "devDependencies": {

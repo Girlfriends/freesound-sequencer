@@ -1,0 +1,3 @@
+[submodule "src/js/freesound.js"]
+	path = src/js/freesound.js
+	url = git@github.com:g-roma/freesound.js.git

@@ -17,8 +17,7 @@ const config = {
 			{
 				loader : "babel-loader",
 				include : [
-					path.resolve(__dirname, "../src/js"),
-					path.resolve(__dirname, "../node_modules/hammerjs")
+					path.resolve(__dirname, "../src/js")
 				],
 				test : /\.jsx?$/
 			},
