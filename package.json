@@ -1,0 +1,68 @@
+{
+  "name": "freesound_sequencer",
+  "version": "1.2.1",
+  "description": "",
+  "author": {
+    "name": "Girlfriends Labs",
+    "url": "http://girlfriends.site"
+  },
+  "contributors": [
+    "Sam Tarakajian <sam@girlfriends.site>",
+    "Cassie Tarakajian <cassie@girlfriends.site>"
+  ],
+  "homepage": "http://girlfriends.site",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Girlfriends/freesound-sequencer.git"
+  },
+  "scripts": {
+    "setup": "node ./.bin/setup.js",
+    "clean": "MW_DEV_SERVER=true node ./.bin/clean.js",
+    "build": "rimraf ./dev_build && cross-env FS_DEV_SERVER=false webpack --config webpack/dev.config.js",
+    "build-release": "rimraf ./build && webpack --config webpack/release.config.js",
+    "serve": "cross-env FS_DEV_SERVER=true webpack-dev-server --config webpack/dev.config.js --open --inline --progress",
+    "lint": "eslint src -c ./.eslintrc.json",
+    "lint-fix": "eslint src -c ./.eslintrc.json --fix",
+    "test": "npm run lint"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "autoprefixer": "^6.5.1",
+    "babel-core": "^6.9.1",
+    "babel-eslint": "^7.1.1",
+    "babel-loader": "^6.2.4",
+    "babel-plugin-add-module-exports": "^0.2.1",
+    "babel-plugin-transform-class-properties": "^6.18.0",
+    "babel-plugin-transform-runtime": "^6.15.0",
+    "babel-preset-es2015": "^6.5.0",
+    "babel-preset-react": "^6.5.0",
+    "bowser": "^1.6.0",
+    "classnames": "^2.2.5",
+    "cross-env": "^3.2.4",
+    "css-loader": "0.25.0",
+    "eslint": "^3.17.1",
+    "eslint-config-recommended": "^1.5.0",
+    "eslint-plugin-react": "^6.10.0",
+    "favicons-webpack-plugin": "^0.0.7",
+    "file-loader": "^0.9.0",
+    "gridlex": "^2.2.3",
+    "html-webpack-plugin": "^2.22.0",
+    "lodash": "^4.16.1",
+    "mkdirp": "^0.5.1",
+    "node-sass": "^3.10.0",
+    "normalize.css": "^4.2.0",
+    "postcss-loader": "^1.1.0",
+    "react": "^15.3.2",
+    "react-color": "^2.11.1",
+    "react-dom": "^15.3.2",
+    "rimraf": "^2.6.1",
+    "sass-loader": "4.0.2",
+    "source-map-loader": "0.1.5",
+    "style-loader": "^0.13.1",
+    "tinycolor2": "1.4.1",
+    "url-loader": "^0.5.7",
+    "webpack": "2.3.2",
+    "webpack-dev-server": "^2.4.2"
+  }
+}
