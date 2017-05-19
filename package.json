@@ -28,7 +28,9 @@
   },
   "dependencies": {
     "config": "^1.26.1",
-    "react": "^15.5.4"
+    "json-loader": "^0.5.4",
+    "react": "^15.5.4",
+    "simple-oauth2": "^1.2.0"
   },
   "devDependencies": {
     "autoprefixer": "^6.5.1",

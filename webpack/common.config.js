@@ -49,8 +49,18 @@ const config = {
 				loader : "source-map-loader",
 				test : /\.jsx$/,
 				enforce : "pre"
+			},
+			{
+				loader : 'json-loader',
+				test : /\.json$/
 			}
-		]
+		],
+	},
+	node: {
+		fs: 'empty',
+		net: 'empty',
+		tls: 'empty',
+		dns: 'empty'
 	},
 	plugins : [
 		new webpack.DefinePlugin({
