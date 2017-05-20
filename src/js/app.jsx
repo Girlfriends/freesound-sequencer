@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react'
 import ReactDOM from "react-dom";
 
 // Components
@@ -6,7 +6,7 @@ import FreesoundSequencer from "./components/freeseq.jsx";
 
 function init(options) {
 	ReactDOM.render(
-		<FreesoundSequencer {...options} />,
+		<FreesoundSequencer {...options}/>,
 		options.element
 	);
 }

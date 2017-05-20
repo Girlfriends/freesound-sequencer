@@ -27,9 +27,14 @@
     "test": "npm run lint"
   },
   "dependencies": {
+    "axios": "^0.16.1",
     "config": "^1.26.1",
+    "express": "^4.15.3",
     "json-loader": "^0.5.4",
+    "querystring": "^0.2.0",
     "react": "^15.5.4",
+    "react-router": "^4.1.1",
+    "react-router-dom": "^4.1.1",
     "simple-oauth2": "^1.2.0"
   },
   "devDependencies": {
@@ -69,5 +74,6 @@
     "url-loader": "^0.5.7",
     "webpack": "2.3.2",
     "webpack-dev-server": "^2.4.2"
-  }
+  },
+  "proxy": "http://localhost:3001"
 }
