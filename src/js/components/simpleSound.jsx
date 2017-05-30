@@ -7,13 +7,16 @@ export default class SimpleSound extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			sounds: []
+			sounds: [],
+			soundSearch: ''
 		};
 		this._onClick = this._onClick.bind(this);
+		this.handleChange = this.handleChange.bind(this);
+		this.handleSubmit = this.handleSubmit.bind(this);
 	}
 
 	componentDidMount() {
-		this._fetchSoundsForQuery(this.props.src);
+		// this._fetchSoundsForQuery(this.props.src);
 	}
 
 	_fetchSoundsForQuery(query) {
@@ -44,21 +47,38 @@ export default class SimpleSound extends React.Component {
 		this.setState({ sounds });
 	}
 
+	handleChange(event) {
+		this.setState({soundSearch: event.target.value});
+	}
+
+	handleSubmit(event) {
+		alert('A name was submitted: ' + this.state.soundSearch);
+		event.preventDefault();
+	}
+
 	render() {
 		return (
 			<div>
-				<p>{ "Searching for: " + this.props.src }</p>
-				<ul>
-					{
-						this.state.sounds.map((sound) => {
-							return <li key={sound.id}>
-								{ sound.name + " : " + sound.id }
-								<button onClick={() => this._onClick(sound.url)}>Download</button>
-							</li>; }
-						)
-					}
-				</ul>
+				<form onSubmit={this.handleSubmit}>
+					<label>
+						Search for a sound:
+						<input type="text" value={this.state.soundSearch} onChange={this.handleChange} />
+					</label>
+					<input type="submit" value="Submit" />
+				</form>
 			</div>
 		);
 	}
+
+	// <p>{ "Searching for: " + this.props.src }</p>
+	// 			<ul>
+	// 				{
+	// 					this.state.sounds.map((sound) => {
+	// 						return <li key={sound.id}>
+	// 							{ sound.name + " : " + sound.id }
+	// 							<button onClick={() => this._onClick(sound.url)}>Download</button>
+	// 						</li>; }
+	// 					)
+	// 				}
+	// 			</ul>
 }

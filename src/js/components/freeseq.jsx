@@ -2,6 +2,7 @@ import React from "react";
 import axios from 'axios';
 import querystring from 'querystring';
 import url from 'url';
+import SimpleSound from './simpleSound.jsx';
 
 const AuthButton = (props) => (
 	props.authenticated ? (
@@ -75,13 +76,9 @@ export default class FreesoundSequencer extends React.Component {
 	}
 
 	_onClick() {
-		console.log("Authorizing, hopefully");
-
 		const oauth2 = require('simple-oauth2').create(credentials);
 
 		const authorizationUri = `https://www.freesound.org/apiv2/oauth2/authorize/?client_id=${credentials.client.id}&response_type=code`;
-
-		console.log(authorizationUri);
 
 		window.location = authorizationUri;
 	}
@@ -91,7 +88,10 @@ export default class FreesoundSequencer extends React.Component {
 			<div>
 				<Home authenticated={this.state.accessToken !== null}/>
 				<p> Hi there </p>
-				<button onClick={this._onClick}>Authorize</button>
+				{this.state.accessToken === null &&
+					<button onClick={this._onClick}>Authorize</button> }
+				{this.state.accessToken !== null &&
+					<SimpleSound /> }
 			</div>
 		);
 	}
