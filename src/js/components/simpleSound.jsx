@@ -1,5 +1,8 @@
 import React from "react";
+import Tone from 'tone';
 import freesound from '../freesound.js/freesound.js';
+import Player from './player.jsx';
+import Sequence from './sequence.jsx';
 
 const freesoundCredentials = require('../credentials/freesound.json');
 
@@ -8,28 +11,24 @@ export default class SimpleSound extends React.Component {
 		super(props);
 		this.state = {
 			sounds: [],
-			soundSearch: ''
+			soundSearch: '',
+			selectedSound: null
 		};
-		this._onClick = this._onClick.bind(this);
 		this.handleChange = this.handleChange.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
+		this.onSelect = this.onSelect.bind(this);
 	}
 
 	componentDidMount() {
-		// this._fetchSoundsForQuery(this.props.src);
 	}
 
 	_fetchSoundsForQuery(query) {
-		const fields = 'id,name,url';
+		const fields = 'id,name,url,previews';
 		const page = 1;
-		const filter = "duration:[1.0 TO 15.0]";
+		const filter = "duration:[0.0 TO 1.5]";
 		const sort = "rating_desc";
 		const token = freesoundCredentials['client-secret'];
 		freesound.textSearch(query, { page, filter, sort, fields, token }, this._updateSounds.bind(this));
-	}
-
-	_onClick(soundUrl) {
-		console.log(soundUrl);
 	}
 
 	_updateSounds(resultSounds) {
@@ -40,7 +39,8 @@ export default class SimpleSound extends React.Component {
 				{
 					id: sound.id,
 					name: sound.name,
-					url: sound.url
+					url: sound.url,
+					preview: sound.previews['preview-lq-mp3']
 				}
 			);
 		}
@@ -52,8 +52,14 @@ export default class SimpleSound extends React.Component {
 	}
 
 	handleSubmit(event) {
-		alert('A name was submitted: ' + this.state.soundSearch);
+		this._fetchSoundsForQuery(this.state.soundSearch);
 		event.preventDefault();
+	}
+
+	onSelect(soundSrc) {
+		this.setState({
+			selectedSound: soundSrc
+		});
 	}
 
 	render() {
@@ -65,20 +71,16 @@ export default class SimpleSound extends React.Component {
 						<input type="text" value={this.state.soundSearch} onChange={this.handleChange} />
 					</label>
 					<input type="submit" value="Submit" />
+					<ul>
+					{
+						this.state.sounds.map((sound) => {
+							return <Player key={sound.id} sound={sound} onSelect={this.onSelect}/>
+						})
+					}
+					</ul>
 				</form>
+				<Sequence src={this.state.selectedSound} />
 			</div>
 		);
 	}
-
-	// <p>{ "Searching for: " + this.props.src }</p>
-	// 			<ul>
-	// 				{
-	// 					this.state.sounds.map((sound) => {
-	// 						return <li key={sound.id}>
-	// 							{ sound.name + " : " + sound.id }
-	// 							<button onClick={() => this._onClick(sound.url)}>Download</button>
-	// 						</li>; }
-	// 					)
-	// 				}
-	// 			</ul>
 }

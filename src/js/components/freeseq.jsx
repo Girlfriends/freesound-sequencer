@@ -92,6 +92,10 @@ export default class FreesoundSequencer extends React.Component {
 					<button onClick={this._onClick}>Authorize</button> }
 				{this.state.accessToken !== null &&
 					<SimpleSound /> }
+					{this.state.accessToken !== null &&
+					<SimpleSound /> }
+					{this.state.accessToken !== null &&
+					<SimpleSound /> }
 			</div>
 		);
 	}

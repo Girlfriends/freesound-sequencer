@@ -1,0 +1,21 @@
+.sequenceContainer {
+	width: 320px;
+	height: 20px;
+	display: flex;
+}
+
+.cell {
+	width: 6.25%;
+	height: 100%;
+	margin-left: 1px;
+	margin-right: 1px;
+	background: gray;
+}
+
+.onset {
+	background: orange;
+}
+
+.active {
+	border: solid;
+}
