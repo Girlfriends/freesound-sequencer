@@ -19,6 +19,11 @@ const config = {
 				include : [
 					path.resolve(__dirname, "../src/js")
 				],
+				query: {
+					cacheDirectory: true,
+					plugins: ['transform-decorators-legacy' ],
+					presets: ['es2015', 'stage-0', 'react']
+				},
 				test : /\.jsx?$/
 			},
 			{
