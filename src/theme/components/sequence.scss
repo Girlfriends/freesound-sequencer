@@ -1,21 +1,18 @@
-.sequenceContainer {
-	width: 320px;
-	height: 20px;
+div.sequence {
 	display: flex;
+	background-color: red;
+	width: 80%;
+	flex-flow: column wrap;
 }
 
-.cell {
-	width: 6.25%;
-	height: 100%;
-	margin-left: 1px;
-	margin-right: 1px;
-	background: gray;
+div.sequenceRow {
+	display: flex;
+	margin-bottom: 20px;
+	justify-content: space-between;
 }
 
-.onset {
-	background: orange;
-}
-
-.active {
-	border: solid;
+div.sequenceCell {
+	width: 60px;
+	height: 60px;
+	background-color: orange;
 }

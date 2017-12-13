@@ -1,5 +1,6 @@
 import React from "react";
-import SimpleSound from './simpleSound.jsx';
+import SequenceContainer from './sequenceContainer.jsx';
+import SequencePicker from './sequencePicker.jsx';
 import { observer } from "mobx-react";
 
 const AuthButton = (props) => (
@@ -33,14 +34,23 @@ const Home = (props) => {
 
 	render() {
 		const authenticated = this.props.store.authentication.authenticated;
-		return (
-			<div>
-				<Home authenticated={authenticated}/>
-				<p> Hi there </p>
-				{!authenticated &&
-					<button onClick={this._onClick}>Authorize</button> }
-			</div>
-		);
+		if (authenticated) {
+			return (
+				<div>
+					<Home authenticated={authenticated}/>
+					<p> Hi there </p>
+					{!authenticated &&
+						<button onClick={this._onClick}>Authorize</button> }
+				</div>
+			);
+		} else {
+			return (
+				<div className="playerContainer">
+					<SequenceContainer store={this.props.store}/>
+					<SequencePicker store={this.props.store}/>
+				</div>
+			);
+		}
 	}
 }
 
