@@ -46,8 +46,8 @@ const Home = (props) => {
 		} else {
 			return (
 				<div className="playerContainer">
-					<SequenceContainer store={this.props.store}/>
-					<SequencePicker store={this.props.store}/>
+					<SequenceContainer sequence={this.props.store.sequences[0]} columns={4} />
+					<SequencePicker />
 				</div>
 			);
 		}

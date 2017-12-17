@@ -5,7 +5,7 @@ export default class SequenceContainer extends React.Component {
 	render() {
 		return (
 			<div className="sequenceContainer">
-				<Sequence store={this.props.store} index={0}/>
+				<Sequence sequence={this.props.sequence} columns={this.props.columns} />
 			</div>
 		);
 	}

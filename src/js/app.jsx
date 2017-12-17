@@ -1,5 +1,6 @@
 import React from 'react'
 import ReactDOM from "react-dom";
+import { Provider } from 'mobx-react';
 import FreesoundStore from "./stores/store.js";
 
 // Components
@@ -10,7 +11,9 @@ function init(options) {
 	store.authentication.parseLocationForAuth();
 	options.store = store;
 	ReactDOM.render(
-		<FreesoundSequencer {...options}/>,
+		<Provider store={store}>
+			<FreesoundSequencer {...options}/>
+		</Provider>,
 		options.element
 	);
 }

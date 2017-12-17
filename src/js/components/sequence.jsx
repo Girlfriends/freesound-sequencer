@@ -1,23 +1,23 @@
 import React from "react";
+import { observer } from 'mobx-react';
 
-const Cell = (props) => {
+const Cell = observer((props) => {
 	let className = "sequenceCell";
-	if (props.active) className += " active";
-	if (props.onset) className += " onset";
-	return <div className={className} onClick={props.onclick} />
-};
+	if (props.cell.active) className += " active";
+	if (props.cell.onset) className += " onset";
+	return <div className={className} onClick={props.cellClick} />
+});
 
 const SequenceRow = (props) => {
 	return (
 		<div className="sequenceRow">
 			{
-				props.cells.map((cell, i) => {
+				props.cells.map((cell, index) => {
 					return <Cell
-									key={i}
+									key={index}
 									classname="sequenceCell"
-									active={false}
-									onset={false}
-									onclick={() => console.log("hi" + cell.index)}
+									cell={cell}
+									cellClick={() => props.cellClick(index)}
 								/>
 				})
 			}
@@ -28,29 +28,28 @@ const SequenceRow = (props) => {
 export default class Sequence extends React.Component {
 	constructor(props) {
 		super(props);
-		const rows = [];
-		for (let i=0; i<16; i++) {
-			const c = {active: false, onset: false, index: i};
-			if (i % 4 == 0) {
-				rows.push([]);
-			}
-			const row = rows[rows.length - 1];
-			row.push(c);
-		}
-		this.state = { rows };
-		this._onClick = this._onClick.bind(this);
+		this._onCellClick = this._onCellClick.bind(this);
 	}
 
-	_onClick(idx) {
-		console.log(idx);
+	_onCellClick(rowIndex, cellIndex) {
+		const sequenceIndex = rowIndex * this.props.columns + cellIndex;
+		this.props.sequence.pulses[sequenceIndex].toggleOnset();
 	}
 
 	render() {
+		const pulses = this.props.sequence.pulses;
+		const rowCount = Math.ceil(pulses.length / this.props.columns);
+		let rowOffsets = [];
+		for (let i=0; i<rowCount; i++) { rowOffsets.push(i * this.props.columns ) }
+
 		return (
 			<div className="sequence">
 			{
-				this.state.rows.map((row, r) => {
-					return <SequenceRow cells={row} key={r}/>
+				rowOffsets.map((index, rowIndex) => {
+					return <SequenceRow
+									cells={pulses.slice(index, index + this.props.columns)}
+									key={rowIndex}
+									cellClick={(cellIndex) => this._onCellClick(rowIndex, cellIndex)} />
 				})
 			}
 			</div>

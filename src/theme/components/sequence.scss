@@ -14,5 +14,9 @@ div.sequenceRow {
 div.sequenceCell {
 	width: 60px;
 	height: 60px;
+	background-color: gray;
+}
+
+div.sequenceCell.onset {
 	background-color: orange;
 }
