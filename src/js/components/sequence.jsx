@@ -1,11 +1,19 @@
 import React from "react";
 import { observer } from 'mobx-react';
+import { CSSTransition } from 'react-transition-group';
 
 const Cell = observer((props) => {
-	let className = "sequenceCell";
-	if (props.cell.active) className += " active";
-	if (props.cell.onset) className += " onset";
-	return <div className={className} onClick={props.cellClick} />
+	let className = "sequence-cell";
+	if (props.cell.onset) className += " onset"
+	return (
+		<CSSTransition
+			in={props.cell.onset}
+			timeout={500}
+			classNames="sequence-cell"
+		>
+			<div className={className} onClick={props.cellClick} />
+		</CSSTransition>
+	);
 });
 
 const SequenceRow = (props) => {
@@ -13,12 +21,13 @@ const SequenceRow = (props) => {
 		<div className="sequenceRow">
 			{
 				props.cells.map((cell, index) => {
-					return <Cell
-									key={index}
-									classname="sequenceCell"
-									cell={cell}
-									cellClick={() => props.cellClick(index)}
-								/>
+					return (
+						<Cell
+							key={index}
+							cell={cell}
+							cellClick={() => props.cellClick(index)}
+						/>
+					)
 				})
 			}
 		</div>

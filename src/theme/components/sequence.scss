@@ -11,12 +11,30 @@ div.sequenceRow {
 	justify-content: space-between;
 }
 
-div.sequenceCell {
+.sequence-cell {
 	width: 60px;
 	height: 60px;
 	background-color: gray;
 }
 
-div.sequenceCell.onset {
+.onset {
 	background-color: orange;
+}
+
+.sequence-cell-enter {
+	background-color: gray;
+}
+
+.sequence-cell-enter.sequence-cell-enter-active {
+	background-color: orange;
+	transition: background-color 250ms ease-in;
+}
+
+.sequence-cell-exit {
+	background-color: orange;
+}
+
+.sequence-cell-exit.sequence-cell-exit-active {
+	background-color: gray;
+	transition: background-color 250ms ease-in;
 }

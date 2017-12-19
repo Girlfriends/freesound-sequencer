@@ -38,6 +38,7 @@
     "react": "^15.5.4",
     "react-router": "^4.1.1",
     "react-router-dom": "^4.1.1",
+    "react-transition-group": "^2.2.1",
     "simple-oauth2": "^1.2.0",
     "tone": "^0.10.0"
   },
