@@ -1,7 +1,8 @@
 import React from "react";
+import SamplePicker from './samplePicker.jsx';
 import SequenceContainer from './sequenceContainer.jsx';
 import SequencePicker from './sequencePicker.jsx';
-import { inject, observer } from "mobx-react";
+import { inject, observer } from 'mobx-react';
 
 const AuthButton = (props) => (
 	props.authenticated ? (
@@ -46,9 +47,14 @@ const Home = (props) => {
 			);
 		} else {
 			return (
-				<div className="playerContainer">
-					<SequenceContainer sequence={this.props.store.sequences[0]} columns={4} />
-					<SequencePicker />
+				<div className="freeseqContainer">
+					<div className="playerContainer" onClick={ () => this.props.store.interface.sampleSearchFocused = false }>
+						<SequenceContainer sequence={this.props.store.sequences[0]} columns={4} />
+						<SequencePicker />
+					</div>
+					<div className="sampleContainer">
+						<SamplePicker />
+					</div>
 				</div>
 			);
 		}
