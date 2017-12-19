@@ -1,7 +1,7 @@
 import React from "react";
 import SequenceContainer from './sequenceContainer.jsx';
 import SequencePicker from './sequencePicker.jsx';
-import { observer } from "mobx-react";
+import { inject, observer } from "mobx-react";
 
 const AuthButton = (props) => (
 	props.authenticated ? (
@@ -21,6 +21,7 @@ const Home = (props) => {
 	);
 };
 
+@inject("store")
 @observer class FreesoundSequencer extends React.Component {
 
 	constructor(props) {

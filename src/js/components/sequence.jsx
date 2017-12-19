@@ -1,20 +1,21 @@
 import React from "react";
-import { observer } from 'mobx-react';
+import { inject, observer } from 'mobx-react';
 import { CSSTransition } from 'react-transition-group';
 
-const Cell = observer((props) => {
+const Cell = inject('store')(observer((props) => {
 	let className = "sequence-cell";
-	if (props.cell.onset) className += " onset"
+	const active = props.store.transport.activePulse === props.cell.index;
+	if (active) className += " onset";
 	return (
 		<CSSTransition
-			in={props.cell.onset}
-			timeout={500}
+			in={active}
+			timeout={5000}
 			classNames="sequence-cell"
 		>
 			<div className={className} onClick={props.cellClick} />
 		</CSSTransition>
 	);
-});
+}));
 
 const SequenceRow = (props) => {
 	return (
