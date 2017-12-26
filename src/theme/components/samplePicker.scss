@@ -1,27 +1,30 @@
+$footer-small-height: 80px;
+$footer-large-height: 360px;
+
 .sample-picker {
 	width: 100%;
-	height: 80px;
+	height: $footer-small-height;
 	background-color: yellow;
 }
 
 .sample-picker-focused {
-	height: 360px;
+	height: $footer-large-height;
 }
 
 .sample-picker-enter {
-	height: 80px;
+	height: $footer-small-height;
 }
 
 .sample-picker-enter.sample-picker-enter-active {
-	height: 360px;
+	height: $footer-large-height;
 	transition: height 150ms ease-out;
 }
 
 .sample-picker-exit {
-	height: 360px;
+	height: $footer-large-height;
 }
 
 .sample-picker-exit.sample-picker-exit-active {
-	height: 80px;
+	height: $footer-small-height;
 	transition: height 150ms ease-out;
 }
