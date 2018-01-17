@@ -1,7 +1,27 @@
 import React from "react";
+import { inject, observer } from 'mobx-react';
 
-export default class SequencerPicker extends React.Component {
+@inject("store")
+@observer export default class SequencerPicker extends React.Component {
 	render() {
-		return <div className="sequencePicker"></div>
+		const buttons = this.props.store.sequences.map((sequence, idx) => {
+			return ( 
+				<div
+					className="sequencePickerButton"
+					onClick={ () => {
+						console.log("Picking sequence with index " + idx);
+						this.props.store.interface.setActiveSequence(idx); 
+					}}
+					key={sequence.id}
+				></div>
+			);
+		});
+		return (
+			<div className="sequencePicker">
+				<div className="sequencePickerButtonContainer">
+					{buttons}
+				</div>
+			</div>
+		);
 	}
 }

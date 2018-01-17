@@ -37,10 +37,11 @@ const Home = (props) => {
 	}
 
 	_renderMainView() {
+		const si = this.props.store.interface.activeSequence;
 		return (
 			<div className="freeseqContainer">
-				<div className="playerContainer" onClick={ () => this.props.store.interface.sampleSearchFocused = false }>
-					<SequenceContainer sequence={this.props.store.sequences[0]} columns={4} />
+				<div className="playerContainer" onClick={ () => this.props.store.interface.setSampleSearchFocused(false) }>
+					<SequenceContainer sequence={this.props.store.sequences[si]} columns={4} />
 					<SequencePicker />
 				</div>
 				<div className="sampleContainer">
@@ -55,9 +56,10 @@ const Home = (props) => {
 	}
 
 	_renderTestView(props) {
+		const si = props.store.interface.activeSequence;
 		return (
 			<div className="freeseqContainer">
-				<SequenceContainer sequence={this.props.store.sequences[0]} columns={8} />
+				<SequenceContainer sequence={props.store.sequences[si]} columns={8} />
 				<button onClick={() => this._startUpAudio()} className='startButton' >Start</button>
 			</div>
 		);
@@ -75,7 +77,7 @@ const Home = (props) => {
 				</div>
 			);
 		} else {
-			return this._renderTestView(this.props);
+			return this._renderMainView(this.props);
 		}
 	}
 }
