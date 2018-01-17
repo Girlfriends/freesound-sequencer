@@ -1,11 +1,16 @@
-import { action, observable } from 'mobx';
+import { types } from 'mobx-state-tree';
 
-export default class TransportStore {
-	@observable playing = false;
-	@observable maxPulseCount = 16;
-	@observable activePulse = -1
-
-	@action advancePulse() {
-		this.activePulse = (this.activePulse + 1) % this.maxPulseCount;
+const TransportModel = types.model({
+	id: types.identifier(),
+	playing: types.optional(types.boolean, false),
+	maxPulseCount: types.optional(types.number, 16),
+	activePulse: types.optional(types.number, -1)
+}).actions(self => {
+	function advancePulse() {
+		self.activePulse = (self.activePulse + 1) % self.maxPulseCount;
 	}
-}
+
+	return { advancePulse };
+});
+
+export default TransportModel;

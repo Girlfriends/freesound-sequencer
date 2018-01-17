@@ -1,5 +1,9 @@
-import { observable } from 'mobx';
+import { types } from 'mobx-state-tree';
 
-export default class InterfaceStore {
-	@observable sampleSearchFocused = false;
-}
+const InterfaceModel = types.model({
+	id: types.identifier(),
+	sampleSearchFocused: types.optional(types.boolean, false)
+});
+
+export default InterfaceModel;
+

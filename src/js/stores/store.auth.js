@@ -1,4 +1,5 @@
 import { action, observable, computed } from 'mobx';
+import { types } from 'mobx-state-tree';
 import axios from 'axios';
 import querystring from 'querystring';
 import url from 'url';
@@ -18,14 +19,16 @@ const credentials = {
 	}
 };
 
-export default class AuthStore {
-	@observable accessToken = null;
-	@observable refreshToken = null;
-	@computed get authenticated() {
-		return this.accessToken !== null;
+const AuthModel = types.model({
+	id: types.identifier(),
+	accessToken: types.optional(types.maybe(types.string), null),
+	refreshToken: types.optional(types.maybe(types.string), null)
+}).views(self => {
+	return {
+		get authenticated() { return self.accessToken !== null }
 	}
-
-	_fetchAccessToken(code) {
+}).actions(self => {
+	function _fetchAccessToken(code) {
 		const tokenUrl = 'https://www.freesound.org/apiv2/oauth2/access_token/';
 		const data = {
 			client_id: credentials.client.id,
@@ -35,26 +38,30 @@ export default class AuthStore {
 		};
 		axios.post(tokenUrl, querystring.stringify(data)).then((res) => {
 			if (res.status === 200) {
-				this.accessToken = res.data.acces_token;
-				this.refreshToken = res.data.refresh_token;
+				self.accessToken = res.data.acces_token;
+				self.refreshToken = res.data.refresh_token;
 			}
 		}).catch((err) => {
 			console.error(err);
 		});
 	}
 
-	authorize() {
-		const oauth2 = require('simple-oauth2').create(credentials);
+	return {
+		authorize() {
+			const oauth2 = require('simple-oauth2').create(credentials);
+	
+			const authorizationUri = `https://www.freesound.org/apiv2/oauth2/authorize/?client_id=${credentials.client.id}&response_type=code`;
+	
+			window.location = authorizationUri;
+		},
 
-		const authorizationUri = `https://www.freesound.org/apiv2/oauth2/authorize/?client_id=${credentials.client.id}&response_type=code`;
-
-		window.location = authorizationUri;
-	}
-
-	@action parseLocationForAuth() {
-		const query = querystring.parse(url.parse(window.location.toString()).query);
-		if (query.code !== undefined && this.accessToken === null) {
-			this._fetchAccessToken(query.code);
+		parseLocationForAuth() {
+			const query = querystring.parse(url.parse(window.location.toString()).query);
+			if (query.code !== undefined && self.accessToken === null) {
+				_fetchAccessToken(query.code);
+			}
 		}
 	}
-}
+});
+
+export default AuthModel;

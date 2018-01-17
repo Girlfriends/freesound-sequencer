@@ -31,11 +31,11 @@ commonConfig.plugins.push(new webpack.DefinePlugin({
 	__FS_DEV_SERVER__ : false
 }));
 
-commonConfig.plugins.push(new webpack.optimize.UglifyJsPlugin({
-	sourceMap : false,
-	compress : {
-		warnings : false
-	}
-}));
+// commonConfig.plugins.push(new webpack.optimize.UglifyJsPlugin({
+// 	sourceMap : false,
+// 	compress : {
+// 		warnings : false
+// 	}
+// }));
 
 module.exports = commonConfig;

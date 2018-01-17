@@ -7,13 +7,15 @@ div.sequence {
 
 div.sequenceRow {
 	display: flex;
-	margin-bottom: 20px;
 	justify-content: space-between;
 }
 
 .sequence-cell {
-	width: 60px;
-	height: 60px;
+	width: 10vw;
+	height: 10vw;
+	border: solid;
+	border-width: 0.5px;
+	border-color: black;
 	background-color: gray;
 }
 
@@ -21,20 +23,24 @@ div.sequenceRow {
 	background-color: orange;
 }
 
+.active {
+	transform: scale(1.2);
+}
+
 .sequence-cell-enter {
-	background-color: gray;
+	transform: scale(1.0);
 }
 
 .sequence-cell-enter.sequence-cell-enter-active {
-	background-color: orange;
-	transition: background-color 20ms ease-out;
+	transform: scale(1.2);
+	transition: transform 20ms ease-out;
 }
 
 .sequence-cell-exit {
-	background-color: orange;
+	transform: scale(1.2);
 }
 
 .sequence-cell-exit.sequence-cell-exit-active {
-	background-color: gray;
-	transition: background-color 400ms ease-out;
+	transform: scale(1.0);
+	transition: transform 400ms ease-out;
 }

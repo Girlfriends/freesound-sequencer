@@ -2,6 +2,7 @@ const path = require("path");
 const pck = require("../package.json");
 const webpack = require("webpack");
 const FaviconsWebpackPlugin = require("favicons-webpack-plugin");
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 const ASSET_DIR = path.resolve(__dirname, path.join("..", "src", "assets"));
 
@@ -10,6 +11,7 @@ let license = fs.readFileSync(path.resolve(__dirname, "../LICENSE"), "utf8");
 license = license.replace(/\n\n/g, "<br/><br/>");
 
 const config = {
+	context: path.join(__dirname, '..'),
 	entry : "./src/js/index.js",
 	target : "web",
 	module : {
@@ -94,7 +96,10 @@ const config = {
 				yandex : false,
 				windows : false
 			}
-		})
+		}),
+		new CopyWebpackPlugin([
+			{from: 'src/assets/snd', to: 'static/snd'}
+		])
 	],
 	watch : process.env.WATCH ? true : false
 };

@@ -4,6 +4,10 @@ const webpack = require("webpack");
 
 const commonConfig = require("./common.config.js");
 
+// commonConfig.entry = [
+// 	'webpack-dev-server/client?http://' + require('os').hostname().toLowerCase() + ':8080',
+// ];
+
 // Output
 commonConfig.output = {
 	path : path.join(__dirname, "..", "dev_build"),
@@ -29,6 +33,8 @@ commonConfig.plugins.push(new webpack.DefinePlugin({
 if (process.env.FS_DEV_SERVER === "true") {
 	commonConfig.devServer = {
 		hot : false,
+		host : '0.0.0.0',
+		public: require('os').hostname().toLowerCase() + ':8080',
 		overlay : {
 			errors : true
 		}

@@ -5,14 +5,16 @@ import { CSSTransition } from 'react-transition-group';
 const Cell = inject('store')(observer((props) => {
 	let className = "sequence-cell";
 	const active = props.store.transport.activePulse === props.cell.index;
-	if (active) className += " onset";
+	const onset = props.cell.onset;
+	if (active) className += " active";
+	if (onset) className += " onset";
 	return (
 		<CSSTransition
 			in={active}
 			timeout={5000}
 			classNames="sequence-cell"
 		>
-			<div className={className} onClick={props.cellClick} />
+			<div className={className} onTouchStart={props.cellClick} />
 		</CSSTransition>
 	);
 }));
