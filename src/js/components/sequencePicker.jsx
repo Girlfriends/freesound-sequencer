@@ -10,9 +10,11 @@ import { inject, observer } from 'mobx-react';
 
 	render() {
 		const buttons = this.props.store.sequences.map((sequence, idx) => {
+			const active = this.props.store.interface.desiredSequence === idx;
+			const classes = "sequencePickerButton" + (active ? " active" : "");
 			return ( 
 				<div
-					className="sequencePickerButton"
+					className={classes}
 					onTouchStart ={() => this._onPointerDown(idx)}
 					onMouseDown={() => this._onPointerDown(idx)}
 					key={sequence.id}

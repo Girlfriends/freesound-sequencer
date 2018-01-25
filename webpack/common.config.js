@@ -19,7 +19,8 @@ const config = {
 			{
 				loader : "babel-loader",
 				include : [
-					path.resolve(__dirname, "../src/js")
+					path.resolve(__dirname, "../src/js"),
+					path.resolve(__dirname, "../node_modules")
 				],
 				query: {
 					cacheDirectory: true,

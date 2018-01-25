@@ -1,8 +1,9 @@
 div.sequenceListContainer {
-	height: 100%;
-	flex: 4 0 0;
+	height: auto;
+	flex: 7.5 0 0;
 	overflow: hidden;
 	position: relative;
+	background-color: #BFF9FF;
 }
 
 div.sequenceContainer {
@@ -10,22 +11,21 @@ div.sequenceContainer {
 	width: 100%;
 	position: absolute;
 	top: 0px;
-	background-color: blue;
+	background-color: transparent;
 	display: flex;
 	align-items: center;
 	justify-content: center;
 
 	&.sequenceTop {
 		transform: translateY(-100%);
-		z-index: -1;
 		&.slideTopIn-0 {
 			animation-name: topSlideDown-0;
-			animation-duration: 100ms;
+			animation-duration: 175ms;
 			animation-timing-function: ease-in-out;
 		}
 		&.slideTopIn-1 {
 			animation-name: topSlideDown-1;
-			animation-duration: 100ms;
+			animation-duration: 175ms;
 			animation-timing-function: ease-in-out;
 		}
 	}
@@ -35,37 +35,36 @@ div.sequenceContainer {
 		z-index: 0;
 		&.slideBottomIn-0 {
 			animation-name: centerSlideUp-0;
-			animation-duration: 100ms;
+			animation-duration: 175ms;
 			animation-timing-function: ease-in-out;
 		}
 		&.slideBottomIn-1 {
 			animation-name: centerSlideUp-1;
-			animation-duration: 100ms;
+			animation-duration: 175ms;
 			animation-timing-function: ease-in-out;
 		}
 		&.slideTopIn-0 {
 			animation-name: centerSlideDown-0;
-			animation-duration: 100ms;
+			animation-duration: 175ms;
 			animation-timing-function: ease-in-out;
 		}
 		&.slideTopIn-1 {
 			animation-name: centerSlideDown-1;
-			animation-duration: 100ms;
+			animation-duration: 175ms;
 			animation-timing-function: ease-in-out;
 		}
 	}
 
 	&.sequenceBottom {
 		transform: translateY(100%);
-		z-index: -1;
 		&.slideBottomIn-0 {
 			animation-name: bottomSlideUp-0;
-			animation-duration: 100ms;
+			animation-duration: 175ms;
 			animation-timing-function: ease-in-out;
 		}
 		&.slideBottomIn-1 {
 			animation-name: bottomSlideUp-1;
-			animation-duration: 100ms;
+			animation-duration: 175ms;
 			animation-timing-function: ease-in-out;
 		}
 	}

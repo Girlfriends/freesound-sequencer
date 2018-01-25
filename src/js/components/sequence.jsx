@@ -55,15 +55,17 @@ export default class Sequence extends React.Component {
 		for (let i=0; i<rowCount; i++) { rowOffsets.push(i * this.props.columns ) }
 
 		return (
-			<div className="sequence">
-			{
-				rowOffsets.map((index, rowIndex) => {
-					return <SequenceRow
-									cells={pulses.slice(index, index + this.props.columns)}
-									key={rowIndex}
-									cellClick={(cellIndex) => this._onCellClick(rowIndex, cellIndex)} />
-				})
-			}
+			<div className="sequence-aspect">
+				<div className="sequence">
+					{
+						rowOffsets.map((index, rowIndex) => {
+							return <SequenceRow
+											cells={pulses.slice(index, index + this.props.columns)}
+											key={rowIndex}
+											cellClick={(cellIndex) => this._onCellClick(rowIndex, cellIndex)} />
+						})
+					}
+				</div>
 			</div>
 		);
 	}

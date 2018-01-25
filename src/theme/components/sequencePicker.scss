@@ -1,7 +1,7 @@
 div.sequencePicker {
-	height: 100%;
+	height: auto;
 	flex: 1 0 0;
-	background-color: green;
+	background-color: #BFF9FF;
 	display: flex;
 	justify-content: flex-end;
 	overflow: hidden;
@@ -17,7 +17,13 @@ div.sequencePicker {
 }
 
 div.sequencePickerButton {
-	width: 40px;
-	height: 40px;
-	background-color: rebeccapurple;
+	width: 30px;
+	height: 50px;
+	background-color: darkgray;
+	border-radius: 10px 0% 0% 10px;
+	align-self: flex-end;
+
+	&.active {
+		width: 38px;
+	}
 }
