@@ -14,6 +14,9 @@ const FreesoundModel = types.model({
 
 let sequences = Array(8);
 sequences = _.map(sequences, (v, k) => createSequenceModel(16, `${k}`));
+_.forEach(sequences, (seq, i) => {
+	seq.pulses[i].toggleOnset()
+});
 
 const store = FreesoundModel.create({
 	authentication: AuthModel.create({ id: "0" }),

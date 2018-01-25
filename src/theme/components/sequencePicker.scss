@@ -4,6 +4,7 @@ div.sequencePicker {
 	background-color: green;
 	display: flex;
 	justify-content: flex-end;
+	overflow: hidden;
 }
 
 .sequencePickerButtonContainer {

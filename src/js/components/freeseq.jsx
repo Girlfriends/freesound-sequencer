@@ -1,6 +1,6 @@
 import React from "react";
 import SamplePicker from './samplePicker.jsx';
-import SequenceContainer from './sequenceContainer.jsx';
+import SequenceListContainer from './sequenceListContainer.jsx';
 import SequencePicker from './sequencePicker.jsx';
 import Tone from 'tone';
 import { inject, observer } from 'mobx-react';
@@ -41,7 +41,7 @@ const Home = (props) => {
 		return (
 			<div className="freeseqContainer">
 				<div className="playerContainer" onClick={ () => this.props.store.interface.setSampleSearchFocused(false) }>
-					<SequenceContainer sequence={this.props.store.sequences[si]} columns={4} />
+					<SequenceListContainer store={this.props.store} />
 					<SequencePicker />
 				</div>
 				<div className="sampleContainer">
@@ -53,16 +53,6 @@ const Home = (props) => {
 
 	_startUpAudio() {
 		Tone.Transport.start();
-	}
-
-	_renderTestView(props) {
-		const si = props.store.interface.activeSequence;
-		return (
-			<div className="freeseqContainer">
-				<SequenceContainer sequence={props.store.sequences[si]} columns={8} />
-				<button onClick={() => this._startUpAudio()} className='startButton' >Start</button>
-			</div>
-		);
 	}
 
 	render() {
