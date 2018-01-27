@@ -10,7 +10,11 @@ const TransportModel = types.model({
 		self.activePulse = (self.activePulse + 1) % self.maxPulseCount;
 	}
 
-	return { advancePulse };
+	function setPlaying(playing) {
+		self.playing = playing;
+	}
+
+	return { advancePulse, setPlaying };
 });
 
 export default TransportModel;

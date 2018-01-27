@@ -42,6 +42,7 @@
     "react-router-dom": "^4.1.1",
     "react-transition-group": "^2.2.1",
     "simple-oauth2": "^1.2.0",
+    "startaudiocontext": "^1.2.1",
     "tone": "^0.11.11"
   },
   "devDependencies": {

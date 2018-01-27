@@ -16,7 +16,6 @@ function init(options) {
 		</Provider>,
 		options.element
 	);
-	// store.transport.playing = true;
 }
 
 export default {

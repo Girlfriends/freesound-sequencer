@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { inject, observer } from 'mobx-react';
 import { CSSTransition } from 'react-transition-group';
+import Tone from 'tone';
 
 @inject ('store')
 @observer class SamplePicker extends Component {
@@ -16,9 +17,12 @@ import { CSSTransition } from 'react-transition-group';
 				classNames="sample-picker"
 			>
 				<div
+					id='startContextDiv'
 					className={className}
 					onClick={ () => {
-							this.props.store.interface.sampleSearchFocused = true;
+							this.props.store.transport.setPlaying(!this.props.store.transport.playing);
+							console.log("Playing: " + this.props.store.transport.playing);
+							// this.props.store.interface.sampleSearchFocused = true;
 						}
 					} >
 				</div>
