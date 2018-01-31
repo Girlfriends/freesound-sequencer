@@ -38,8 +38,7 @@ const AuthModel = types.model({
 		};
 		axios.post(tokenUrl, querystring.stringify(data)).then((res) => {
 			if (res.status === 200) {
-				self.accessToken = res.data.acces_token;
-				self.refreshToken = res.data.refresh_token;
+				self.setAuthTokens(res.data.access_token, res.data.refresh_token);
 			}
 		}).catch((err) => {
 			console.error(err);
@@ -60,6 +59,11 @@ const AuthModel = types.model({
 			if (query.code !== undefined && self.accessToken === null) {
 				_fetchAccessToken(query.code);
 			}
+		},
+
+		setAuthTokens(accessToken, refreshToken) {
+			self.accessToken = accessToken;
+			self.refreshToken = refreshToken;
 		}
 	}
 });

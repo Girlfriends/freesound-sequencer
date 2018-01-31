@@ -23,3 +23,27 @@ div.playerContainer {
 .startButton {
 	flex: 1 0 0;
 }
+
+div.audioStartOverlay {
+	position: absolute;
+	background-color: black;
+	opacity: 0.3;
+	width: 100%;
+	height: 100%;
+	z-index: 1000;
+}
+
+div.authenticationOverlay {
+	position: absolute;
+    z-index: 500;
+    width: 80%;
+    height: 100%;
+    justify-content: center;
+    display: flex;
+    flex-flow: column;
+    background-color: transparentize(#000000, 0.3);
+    color: white;
+    padding-left: 10%;
+    padding-right: 10%;
+    text-align: right;
+}

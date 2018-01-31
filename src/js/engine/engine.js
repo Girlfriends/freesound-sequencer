@@ -1,13 +1,14 @@
 import Tone from 'tone';
-import { autorun } from 'mobx';
+import { observable, autorun } from 'mobx';
 import _ from 'lodash';
 import StartAudioContext from 'startaudiocontext';
 
 export default class Engine {
+	@observable initialized = false;
+
 	constructor(store) {
 		const self = this;
 		const notes = ['C3', 'C#3', 'D3', 'D#3', 'E3', 'F3', 'F#3', 'G3'];
-		this._initialized = false;
 		this._transportStore = store.transport;
 		this._sequences = store.sequences;
 		this._stepSequence = new Tone.Sequence((time, col) => {
@@ -41,7 +42,7 @@ export default class Engine {
 	_initialize() {
 		StartAudioContext(Tone.context, '#startContextDiv');
 		Tone.Transport.start();
-		this._initialized = true;
+		this.initialized = true;
 	}
 
 	_onPlayStateChange() {

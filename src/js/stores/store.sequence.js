@@ -13,7 +13,14 @@ const SequencePulseModel = types.model({
 
 const SequenceModel = types.model({
 	id: types.identifier(),
-	pulses: types.array(SequencePulseModel)
+	pulses: types.array(SequencePulseModel),
+	sampleSearch: types.optional(types.string, "")
+}).actions(self => {
+	return {
+		setSearchText: (text) => {
+			self.sampleSearch = text;
+		}
+	}
 });
 
 export default SequenceModel;

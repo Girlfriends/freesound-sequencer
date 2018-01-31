@@ -5,25 +5,29 @@ import SequencePicker from './sequencePicker.jsx';
 import Tone from 'tone';
 import { inject, observer } from 'mobx-react';
 
-const AuthButton = (props) => (
-	props.authenticated ? (
-		<p>
-			Welcome!
-		</p>
-	) : (
-		<p>You are not logged in.</p>
-	)
-);
-
-const Home = (props) => {
+const AuthOverlay = (props) => {
 	return (
-		<div>
-			<AuthButton authenticated={props.authenticated}/>
+		<div
+			className="authenticationOverlay"
+			onClick={ props.store.authentication.authorize }
+		>
+			<h1> Welcome to the Freesound Sequencer! </h1>
+			<h2> Tap anywhere to authorize with your Freesound Account </h2>
 		</div>
-	);
-};
+	)
+}
 
-@inject("store")
+const AudioContextOverlay = (props) => {
+	return (
+		<div
+			id="startContextDiv"
+			className="audioStartOverlay"
+			onClick={ () => props.store.transport.setPlaying(true) }
+		/>
+	);
+}
+
+@inject("store", "engine")
 @observer class FreesoundSequencer extends React.Component {
 
 	constructor(props) {
@@ -38,8 +42,15 @@ const Home = (props) => {
 
 	_renderMainView() {
 		const si = this.props.store.interface.activeSequence;
+		const authenticated = this.props.store.authentication.authenticated;
 		return (
 			<div className="freeseqContainer">
+				{!authenticated &&
+					<AuthOverlay {...this.props} />
+				}
+				{authenticated && !this.props.engine.initialized &&
+					<AudioContextOverlay {...this.props} />
+				}
 				<div className="playerContainer" onClick={ () => this.props.store.interface.setSampleSearchFocused(false) }>
 					<SequenceListContainer store={this.props.store} />
 					<SequencePicker />
@@ -56,19 +67,7 @@ const Home = (props) => {
 	}
 
 	render() {
-		const authenticated = this.props.store.authentication.authenticated;
-		if (authenticated) {
-			return (
-				<div>
-					<Home authenticated={authenticated}/>
-					<p> Hi there </p>
-					{!authenticated &&
-						<button onClick={this._onClick}>Authorize</button> }
-				</div>
-			);
-		} else {
-			return this._renderMainView(this.props);
-		}
+		return this._renderMainView(this.props);
 	}
 }
 
