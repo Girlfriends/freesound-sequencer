@@ -9,23 +9,33 @@ const freesound = require('../freesound.js/freesound.js');
 
 	constructor(props) {
 		super(props);
+		this._fetchSoundsForQuery = this._fetchSoundsForQuery.bind(this);
 		this._handleChange = this._handleChange.bind(this);
 		this._handleSubmit = this._handleSubmit.bind(this);
 	}
 
-	_handleChange (event) {
+	_fetchSoundsForQuery(query) {
+		const fields = 'id,name,url,previews';
+		const page = 1;
+		const filter = "duration:[0.0 TO 1.5]";
+		const sort = "rating_desc";
+		const token = this.props.store.authentication.clientSecret;
+		freesound.textSearch(query, { page, filter, sort, fields, token }, function(thing) {
+			console.log(thing);
+		});
+	}
+
+	_handleChange(event) {
 		const activeSampleIdx = this.props.store.interface.activeSequence;
 		const activeSample = this.props.store.sequences[activeSampleIdx];
 		activeSample.setSearchText(event.target.value);
 	}
 
-	_handleSubmit (event) {
+	_handleSubmit(event) {
 		const activeSampleIdx = this.props.store.interface.activeSequence;
 		const activeSample = this.props.store.sequences[activeSampleIdx];
-		freesound.setToken(this.props.store.authentication.accessToken);
-		freesound.textSearch(activeSample.sampleSearch, {}, function (thing) {
-			console.log(thing);
-		});
+		// freesound.setToken(this.props.store.authentication.accessToken);
+		this._fetchSoundsForQuery(activeSample.sampleSearch);
 		event.preventDefault();
 	}
 

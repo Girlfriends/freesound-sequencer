@@ -25,7 +25,8 @@ const AuthModel = types.model({
 	refreshToken: types.optional(types.maybe(types.string), null)
 }).views(self => {
 	return {
-		get authenticated() { return self.accessToken !== null }
+		get authenticated() { return self.accessToken !== null },
+		get clientSecret() { return credentials.client.secret }
 	}
 }).actions(self => {
 	function _fetchAccessToken(code) {
