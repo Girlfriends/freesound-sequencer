@@ -29,3 +29,32 @@ $footer-large-height: 360px;
 	height: $footer-small-height;
 	transition: height 150ms ease-out;
 }
+
+.sample-search-label {
+	display: block;
+	width: 100%;
+}
+
+.sample-search-field {
+	width: 80%;
+	height: 22px;
+	background-color: transparent;
+	border: none;
+	text-indent: 8px;
+	font-size: 18px;
+}
+
+.sample-search-button {
+	width: 18%;
+	background-color: transparent;
+	border-width: 0 0 0 1px;
+	border-color: black;
+	margin: 0;
+	padding: 0;
+	font-size: 18px;
+}
+
+.search-results-scrollable {
+	height: 100%;
+	overflow: scroll;
+}

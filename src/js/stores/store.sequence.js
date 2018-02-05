@@ -11,12 +11,40 @@ const SequencePulseModel = types.model({
 	return { toggleOnset };
 });
 
+const SampleSearchResultModel = types.model({
+	id: types.identifier(),
+	name: types.string,
+	imageURL: types.string,
+	previewURL: types.string,
+	downloadURL: types.string
+});
+
 const SequenceModel = types.model({
 	id: types.identifier(),
+	activeSample: types.string,
 	pulses: types.array(SequencePulseModel),
-	sampleSearch: types.optional(types.string, "")
+	sampleSearch: types.optional(types.string, ""),
+	searchResults: types.array(SampleSearchResultModel)
 }).actions(self => {
 	return {
+		setActiveSample: (sample) => {
+			self.activeSample = sample;
+		},
+
+		setSearchResults: (results) => {
+			self.searchResults = [];
+			results.forEach((result) => {
+				const resultModel = SampleSearchResultModel.create({
+					id: (result.id).toString(),
+					name: result.name,
+					imageURL: result.images.waveform_m,
+					previewURL: result.previews["preview-lq-ogg"],
+					downloadURL: result.download
+				});
+				self.searchResults.push(resultModel);
+			});
+		},
+
 		setSearchText: (text) => {
 			self.sampleSearch = text;
 		}
@@ -25,11 +53,12 @@ const SequenceModel = types.model({
 
 export default SequenceModel;
 
-export function createSequenceModel(size, id) {
+export function createSequenceModel(size, sample, id) {
 	const pulses = [];
+	const searchResults = [];
 	for (let i = 0; i < size; i++) {
 		pulses.push(SequencePulseModel.create({ index: i }));
 	}
 
-	return SequenceModel.create({ pulses, id });
+	return SequenceModel.create({ pulses, activeSample:sample, id, searchResults });
 }
