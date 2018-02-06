@@ -29,7 +29,7 @@
     "lint-fix": "eslint src -c ./.eslintrc.json --fix",
     "test": "npm run lint",
     "preinstall": "./.bin/preinstall.sh",
-    "start": "npm run serve"
+    "start": "npm run build && http-server dev_build -p 8080"
   },
   "dependencies": {
     "axios": "^0.16.1",
@@ -37,6 +37,7 @@
     "copy-webpack-plugin": "^4.3.1",
     "express": "^4.15.3",
     "gulp": "^3.9.1",
+    "http-server": "^0.11.1",
     "json-loader": "^0.5.4",
     "mobx": "^3.4.1",
     "mobx-react": "^4.3.5",
