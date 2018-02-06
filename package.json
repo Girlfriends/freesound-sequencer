@@ -30,7 +30,8 @@
     "lint-fix": "eslint src -c ./.eslintrc.json --fix",
     "test": "npm run lint",
     "preinstall": "./.bin/preinstall.sh",
-    "start": "npm run build && node server.js"
+    "heroku-postbuild": "npm run build",
+    "start": "node server.js"
   },
   "dependencies": {
     "axios": "^0.16.1",
