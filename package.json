@@ -1,7 +1,8 @@
 {
   "name": "freesound_sequencer",
   "engines": {
-    "node": ">=0.12"
+    "node": ">=0.12",
+    "npm": "=3.10.7"
   },
   "version": "1.2.1",
   "description": "",
