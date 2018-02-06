@@ -27,7 +27,8 @@
     "serve": "cross-env FS_DEV_SERVER=true webpack-dev-server --config webpack/dev.config.js --open --inline --progress",
     "lint": "eslint src -c ./.eslintrc.json",
     "lint-fix": "eslint src -c ./.eslintrc.json --fix",
-    "test": "npm run lint"
+    "test": "npm run lint",
+    "preinstall": "./.bin/preinstall.sh"
   },
   "dependencies": {
     "axios": "^0.16.1",
