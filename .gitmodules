@@ -1,0 +1,7 @@
+[submodule "Tone.js"]
+	path = Tone.js
+	url = https://github.com/Girlfriends/Tone.js.git
+	branch = dev
+[submodule "src/js/freesound.js"]
+	path = src/js/freesound.js
+	url = https://github.com/Girlfriends/freesound.js.git
