@@ -30,7 +30,7 @@
     "lint-fix": "eslint src -c ./.eslintrc.json --fix",
     "test": "npm run lint",
     "preinstall": "./.bin/preinstall.sh",
-    "heroku-postbuild": "npm run build",
+    "heroku-postbuild": "rimraf ./dev_build && cross-env FS_DEV_SERVER=false webpack --config webpack/dev.config.js",
     "start": "node server.js"
   },
   "dependencies": {
