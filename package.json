@@ -93,5 +93,8 @@
     "webpack": "2.3.2",
     "webpack-dev-server": "2.7.1"
   },
+  "optionalDependencies": {
+    "fsevents": "*"
+  },
   "proxy": "http://localhost:3001"
 }
