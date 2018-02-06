@@ -1,6 +1,6 @@
 [submodule "src/js/freesound.js"]
 	path = src/js/freesound.js
-	url = git@github.com:g-roma/freesound.js.git
+	url = git@github.com:Girlfriends/freesound.js.git
 [submodule "Tone.js"]
 	path = Tone.js
 	url = git@github.com:Girlfriends/Tone.js.git
