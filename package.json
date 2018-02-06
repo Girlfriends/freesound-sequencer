@@ -1,5 +1,8 @@
 {
   "name": "freesound_sequencer",
+  "engines": {
+    "node": ">=0.12"
+  },
   "version": "1.2.1",
   "description": "",
   "author": {
