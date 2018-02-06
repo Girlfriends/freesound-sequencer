@@ -1,0 +1,40 @@
+.sample-search-result {
+    display: flex;
+    margin-left: 0.3em;
+}
+
+.sample-result-panel {
+    display: flex;
+    margin-left: 0.3em;
+    padding-top: 0.2em;
+    padding-bottom: 0.2em;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+.sample-result-title {
+    width: 100%;
+}
+
+.sample-result-buttons {
+    width: 100%;
+    display: flex;
+
+    .sample-result-button {
+        width: 50%;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        margin-left: 8px;
+        margin-right: 8px;
+    }
+}
+
+.sample-swap-button {
+    background-color: #E9B0E5;
+}
+
+.sample-preview-button {
+    background-color: lightgray;
+}

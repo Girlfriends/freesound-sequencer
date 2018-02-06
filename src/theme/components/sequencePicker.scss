@@ -26,4 +26,8 @@ div.sequencePickerButton {
 	&.active {
 		width: 38px;
 	}
+
+	&.blinking {
+		background-color: #E9B0E5;
+	}
 }

@@ -1,6 +1,20 @@
 import React from "react";
 import { inject, observer } from 'mobx-react';
 
+const SequencePickerButton = inject("store")(observer((props) => {
+	const active = props.store.interface.desiredSequence === props.idx;
+	const activePulse = props.store.transport.activePulse;
+	const blinking = props.store.sequences[props.idx].pulseIsOnsetAtStep(activePulse);
+	const classes = "sequencePickerButton" + (active ? " active" : "") + (blinking ? " blinking" : "");
+	return ( 
+		<div
+			className={classes}
+			onTouchStart ={() => props.onPointerDown(props.idx)}
+			onMouseDown={() => props.onPointerDown(props.idx)}
+		></div>
+	);
+}));
+
 @inject("store")
 @observer export default class SequencerPicker extends React.Component {
 	_onPointerDown = (idx) => {
@@ -10,16 +24,11 @@ import { inject, observer } from 'mobx-react';
 
 	render() {
 		const buttons = this.props.store.sequences.map((sequence, idx) => {
-			const active = this.props.store.interface.desiredSequence === idx;
-			const classes = "sequencePickerButton" + (active ? " active" : "");
-			return ( 
-				<div
-					className={classes}
-					onTouchStart ={() => this._onPointerDown(idx)}
-					onMouseDown={() => this._onPointerDown(idx)}
-					key={sequence.id}
-				></div>
-			);
+			return <SequencePickerButton
+				onPointerDown={this._onPointerDown.bind(this)}
+				idx={idx}
+				key={idx}
+			/>
 		});
 		return (
 			<div className="sequencePicker">

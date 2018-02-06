@@ -49,7 +49,12 @@ const SequenceModel = types.model({
 			self.sampleSearch = text;
 		}
 	}
-});
+}).views(self => ({
+	pulseIsOnsetAtStep(step) {
+		if (step < 0 || step >= self.pulses.length) return false;
+		return self.pulses[step].onset;
+	}
+}));
 
 export default SequenceModel;
 
