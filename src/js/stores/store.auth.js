@@ -3,7 +3,7 @@ import { types } from 'mobx-state-tree';
 import axios from 'axios';
 import querystring from 'querystring';
 import url from 'url';
-import credentials from ('../credentials/credentials.js');
+import credentials from '../credentials/credentials.js';
 
 const AuthModel = types.model({
 	id: types.identifier(),
