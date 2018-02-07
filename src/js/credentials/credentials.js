@@ -1,9 +1,9 @@
-const cjson = require('../credentials/freesound.json');
+require('dotenv').config()
 
 const credentials = {
 	client: {
-		id: cjson['client-id'],
-		secret: cjson['client-secret']
+		id: process.env.FREESOUND_CLIENT_ID,
+		secret: process.env.FREESOUND_CLIENT_SECRET
 	},
 	auth: {
 		authorizeHost: 'https://freesound.org',

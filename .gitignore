@@ -3,3 +3,4 @@ build
 freesound-sequencer-key
 dev_build
 npm-debug.log
+.env
