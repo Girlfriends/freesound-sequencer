@@ -1,8 +1,8 @@
 {
   "name": "freesound_sequencer",
   "engines": {
-    "node": ">=0.12",
-    "npm": "=3.10.7"
+    "node": "=8.9.0",
+    "npm": "=5.5.1"
   },
   "version": "1.2.1",
   "description": "",
@@ -30,7 +30,7 @@
     "lint-fix": "eslint src -c ./.eslintrc.json --fix",
     "test": "npm run lint",
     "preinstall": "./.bin/preinstall.sh",
-    "heroku-postbuild": "rimraf ./dev_build && cross-env FS_DEV_SERVER=false webpack --config webpack/dev.config.js",
+    "heroku-postbuild": "npm install --only=dev --no-shrinkwrap && npm run build",
     "start": "node server.js"
   },
   "dependencies": {
