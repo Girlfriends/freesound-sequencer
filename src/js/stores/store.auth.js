@@ -1,9 +1,9 @@
 import { action, observable, computed } from 'mobx';
 import { types } from 'mobx-state-tree';
-import axios from 'axios';
-import querystring from 'querystring';
 import url from 'url';
-import credentials from '../credentials/credentials.js';
+import querystring from 'querystring';
+import { fetchAccessToken, getAuthorizationURL } from '../server/server.js';
+
 
 const AuthModel = types.model({
 	id: types.identifier(),
@@ -16,16 +16,9 @@ const AuthModel = types.model({
 	}
 }).actions(self => {
 	function _fetchAccessToken(code) {
-		const tokenUrl = 'https://www.freesound.org/apiv2/oauth2/access_token/';
-		const data = {
-			client_id: credentials.client.id,
-			client_secret: credentials.client.secret,
-			grant_type: 'authorization_code',
-			code: code
-		};
-		axios.post(tokenUrl, querystring.stringify(data)).then((res) => {
+		fetchAccessToken(code).then((res) => {
 			if (res.status === 200) {
-				self.setAuthTokens(res.data.access_token, res.data.refresh_token);
+				self.setAuthTokens(res.data.accessToken, res.data.refresh_token);
 			}
 		}).catch((err) => {
 			console.error(err);
@@ -34,11 +27,14 @@ const AuthModel = types.model({
 
 	return {
 		authorize() {
-			const oauth2 = require('simple-oauth2').create(credentials);
-	
-			const authorizationUri = `https://www.freesound.org/apiv2/oauth2/authorize/?client_id=${credentials.client.id}&response_type=code`;
-	
-			window.location = authorizationUri;
+			getAuthorizationURL().then((res) => {
+				if (res.status === 200) {
+					const authorizationUri = res.data.authorizationURL;
+					window.location = authorizationUri;
+				}
+			}).catch((err) => {
+				console.error(err)
+			});
 		},
 
 		parseLocationForAuth() {

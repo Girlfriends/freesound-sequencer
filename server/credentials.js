@@ -1,5 +1,3 @@
-require('dotenv').config()
-
 const credentials = {
 	client: {
 		id: process.env.FREESOUND_CLIENT_ID,
@@ -13,4 +11,4 @@ const credentials = {
 	}
 };
 
-export default credentials;
+module.exports = credentials;
