@@ -4,10 +4,11 @@ const credentials = require('./credentials.js');
 const axios = require('axios');
 const querystring = require('querystring');
 const cors = require('cors');
+const freesound = require('./freesound.js/freesound.js');
 
 app.use(cors());
 app.use(express.json());
-app.use(express.urlencoded());
+app.use(express.urlencoded({extended: true}));
 
 app.post('/auth/fetchAccessToken', (req, res) => {
     const tokenUrl = 'https://www.freesound.org/apiv2/oauth2/access_token/';
@@ -37,6 +38,19 @@ app.get('/auth/getAuthorizationURL', (req, res) => {
     res.json({
         authorizationURL: authorizationUri
     }).end();
+});
+
+app.post('/search', (req, res) => {
+    const fields = 'id,name,url,previews,images,download';
+    const page = 1;
+    const filter = "duration:[0.0 TO 1.5]";
+    const sort = "rating_desc";
+    const query = req.body.query;
+    const token = credentials.client.secret;
+    freesound.textSearch(query, { page, filter, sort, fields, token }, (response) => {
+        const data = { results: response.results };
+        res.json(data).end();
+    });
 });
 
 app.use('/', express.static('dev_build'));

@@ -1,7 +1,7 @@
 import axios from 'axios';
 import querystring from 'querystring';
 
-const serverURLRoot= "http://localhost:8080"
+const serverURLRoot= "";
 
 export function fetchAccessToken(code) {
     const serverURL = serverURLRoot +"/auth/fetchAccessToken";
@@ -12,4 +12,11 @@ export function fetchAccessToken(code) {
 export function getAuthorizationURL() {
     const serverURL = serverURLRoot + "/auth/getAuthorizationURL";
     return axios.get(serverURL);
+}
+
+export function textSearch(query) {
+    const serverURL = serverURLRoot + "/search";
+    const data = { query };
+    return axios.post(serverURL, querystring.stringify(data));
+    
 }
