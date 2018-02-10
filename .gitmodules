@@ -2,3 +2,6 @@
 	path = Tone.js
 	url = https://github.com/Girlfriends/Tone.js.git
 	branch = dev
+[submodule "server/freesound.js"]
+	path = server/freesound.js
+	url = https://github.com/Girlfriends/freesound.js.git
