@@ -4,18 +4,23 @@ import { CSSTransition } from 'react-transition-group';
 
 const Cell = inject('store')(observer((props) => {
 	let className = "sequence-cell";
+	let overlayClassName = "sequence-cell-overlay";
 	const active = props.store.transport.activePulse === props.cell.index;
 	const onset = props.cell.onset;
 	if (active) className += " active";
 	if (onset) className += " onset";
+	if (active) overlayClassName += " active";
 	return (
-		<CSSTransition
-			in={active}
-			timeout={5000}
-			classNames="sequence-cell"
-		>
-			<div className={className} onTouchStart={props.cellClick} />
-		</CSSTransition>
+		<div className="sequence-cell-container">
+			<CSSTransition
+				in={active}
+				timeout={5000}
+				classNames="sequence-cell"
+			>
+				<div className={className} onTouchStart={props.cellClick} />
+			</CSSTransition>
+			<div className={overlayClassName} />
+		</div>
 	);
 }));
 

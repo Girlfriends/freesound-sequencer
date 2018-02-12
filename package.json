@@ -31,7 +31,8 @@
     "test": "npm run lint",
     "preinstall": "./.bin/preinstall.sh",
     "heroku-postbuild": "npm install --only=dev --no-shrinkwrap && npm run build",
-    "start": "node server.js"
+    "start": "node server.js",
+    "watch": "webpack --watch --progress --config webpack/dev.config.js"
   },
   "dependencies": {
     "axios": "^0.16.1",
